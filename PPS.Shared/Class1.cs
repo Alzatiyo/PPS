@@ -1,7 +1,5 @@
-﻿namespace PPS.Shared
+﻿namespace PPS.Shared;
+public class Class1
 {
-    public class Class1
-    {
 
-    }
 }

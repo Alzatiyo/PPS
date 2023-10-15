@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
 {
-    internal class Recorrido
+    public class Recorrido
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El valor es Obligatorio")]

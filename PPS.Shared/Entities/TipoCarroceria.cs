@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
 {
-    internal class TipoCarroceria
+    public class TipoCarroceria
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El Nombre es Obligatorio")]

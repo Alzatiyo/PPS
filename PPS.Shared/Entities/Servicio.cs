@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
 {
-    internal class Servicio
+    public class Servicio
     {
         public int Id { get; set; }
         public DateTime Fecha { get; set; }

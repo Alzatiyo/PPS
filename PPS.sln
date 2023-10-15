@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPS.API", "PPS.API\PPS.API.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPS.WEB", "PPS.WEB\PPS.WEB.csproj", "{F71F3625-C8FB-4BAB-BC06-250DA28A2C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPS.Shared", "PPS.Shared\PPS.Shared.csproj", "{5F50B860-A94C-4C2F-946F-6C8BD07F6B58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PPS.Shared", "PPS.Shared\PPS.Shared.csproj", "{5F50B860-A94C-4C2F-946F-6C8BD07F6B58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

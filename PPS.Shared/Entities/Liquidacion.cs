@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
 {
-    internal class Liquidacion
+    public class Liquidacion
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El Egreso es Obligatorio")]

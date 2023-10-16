@@ -16,6 +16,8 @@ namespace PPS.Shared.Entities
         public int Ingreso { get; set; }
         public int Facturar { get; set; }
 
+        public ICollection<Liquidacion_Servicio> liquidacion_Servicios { get; set; }
+
         //Servicio
     }
 }

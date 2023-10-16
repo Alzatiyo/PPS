@@ -14,6 +14,8 @@ namespace PPS.Shared.Entities
         public int valor { get; set; }
         public int Estado { get; set; }
 
+        public ICollection<Recorrido_Servicio> recorrido_Servicios { get; set; }
+
         //origen
         //Destino
 

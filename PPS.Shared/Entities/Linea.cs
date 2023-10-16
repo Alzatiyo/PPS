@@ -13,5 +13,7 @@ namespace PPS.Shared.Entities
         [Required(ErrorMessage = "El Nombre es Obligatorio")]
         public string Nombre { get; set; } = string.Empty;
         public string? Observacion { get; set; } = null;
+
+        public ICollection<Linea_Vehiculo> linea_Vehiculos { get; set; }
     }
 }

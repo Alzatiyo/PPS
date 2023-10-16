@@ -27,6 +27,12 @@ namespace PPS.Shared.Entities
         [Required(ErrorMessage = "El Numero de Chasis es Obligatorio")]
         public string NumeroChasis { get; set; } = string.Empty;
 
+        public ICollection<Vehiculo_Servicio> vehiculo_Servicios { get; set; }
+        public ICollection<Marca_Vehiculo> marca_Vehiculos { get; set; }
+        public ICollection<Linea_Vehiculo> linea_Vehiculos { get; set; }
+        public ICollection<TipoCarroceria_Vehiculo> tipoCarroceria_Vehiculos { get; set; }
+        public ICollection<Transito_Vehiculo> transito_Vehiculos { get; set; }
+
         //Marca
         //Linea
         //TipoCarroceria

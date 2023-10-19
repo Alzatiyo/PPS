@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
 {
-    internal class Vehiculo
+    public class Vehiculo
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "La placa es Obligatoria")]

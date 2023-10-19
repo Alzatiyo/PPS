@@ -14,6 +14,8 @@ namespace PPS.Shared.Entities
         public int Estado { get; set; }
         public string? Observacion { get; set; } = null;
 
+        public ICollection<EstadoServicio_Servicio> estadoServicio_Servicios { get; set; }
+
         //servicio
     }
 }

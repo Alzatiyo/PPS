@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
@@ -12,15 +13,20 @@ namespace PPS.Shared.Entities
         public DateTime Fecha { get; set; }
         public int NumeroServicio { get; set; }
         public string? Observacion { get; set; } = null;
-
-        public ICollection<EstadoServicio_Servicio> estadoServicio_Servicios { get; set; }
-        public ICollection<Liquidacion_Servicio> liquidacion_Servicios { get; set; }
-        public ICollection<Recorrido_Servicio> recorrido_Servicios { get; set; }
+        [JsonIgnore]
+        public int IdEstadoServicio { get; set; }
+        [JsonIgnore]
+        public int IdRecorrido { get; set; }
+        [JsonIgnore]
+        public int IdLiquidacion { get; set; }
+        [JsonIgnore]
+        public EstadoServicio EstadoServicio { get; set; }
+        [JsonIgnore]
+        public Recorrido recorrido { get; set; }
+        [JsonIgnore]
         public ICollection<Vehiculo_Servicio> vehiculo_Servicios { get; set; }
+        [JsonIgnore]
+        public Liquidacion Liquidacion { get; set; }
 
-        //recorrido
-        //vehiculo
-        //cliente
-        //conductor
     }
 }

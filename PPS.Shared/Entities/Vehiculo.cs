@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
@@ -26,17 +27,23 @@ namespace PPS.Shared.Entities
         public string NumeroSerie { get; set; } = string.Empty;
         [Required(ErrorMessage = "El Numero de Chasis es Obligatorio")]
         public string NumeroChasis { get; set; } = string.Empty;
-
+        [JsonIgnore]
+        public int IdTransito { get; set; }
+        [JsonIgnore]
+        public int IdMarca { get; set; }
+        [JsonIgnore]
+        public int IdLinea { get; set; }
+        [JsonIgnore]
+        public int IdTipoCarroceria { get; set; }
+        [JsonIgnore]
+        public Transito Transito { get; set; }
+        [JsonIgnore]
+        public Marca marca { get; set; }
+        [JsonIgnore]
+        public Linea linea { get; set; }
+        [JsonIgnore]
+        public TipoCarroceria TipoCarroceria { get; set; }
+        [JsonIgnore]
         public ICollection<Vehiculo_Servicio> vehiculo_Servicios { get; set; }
-        public ICollection<Marca_Vehiculo> marca_Vehiculos { get; set; }
-        public ICollection<Linea_Vehiculo> linea_Vehiculos { get; set; }
-        public ICollection<TipoCarroceria_Vehiculo> tipoCarroceria_Vehiculos { get; set; }
-        public ICollection<Transito_Vehiculo> transito_Vehiculos { get; set; }
-
-        //Marca
-        //Linea
-        //TipoCarroceria
-        //Transito
-        //Propietario
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PPS.Shared.Entities
@@ -10,10 +11,9 @@ namespace PPS.Shared.Entities
     {
         public int id { get; set; }
 
-        public Vehiculo vehiculo { get; set; }
-        public int VehiculoId { get; set; }
-
-        public Servicio servicio { get; set; }
-        public int ServicioId { get; set; }
+        [JsonIgnore]
+        public Servicio IdServicio { get; set; }
+        [JsonIgnore]
+        public Vehiculo IdVehiculo { get; set; }
     }
 }

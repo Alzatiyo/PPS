@@ -1,0 +1,50 @@
+﻿@page "/Servicio"
+@using PPS.WEB.Repositories;
+@using PPS.Shared.Entities;
+
+@inject IRepository Repository
+
+<h3>ServicioIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Servicios/create">
+        Nuevo servicios
+    </a>
+</div>
+
+<GenericList MyList="servicios">
+    <Body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>servicios</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var servicio in servicios!)
+                {
+                    <tr>
+                        <td>
+                            @servicio.Recorrido
+                        </td>
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>
+
+@code {
+    public List<Servicio>? servicios { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await Repository.Get<List<Servicio>>("/api/Servicio");
+        servicios = responseHttp.Response!;
+    }
+}

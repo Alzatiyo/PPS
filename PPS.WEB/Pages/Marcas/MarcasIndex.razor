@@ -1,0 +1,50 @@
+﻿@page "/Marcas"
+@using PPS.WEB.Repositories;
+@using PPS.Shared.Entities;
+
+@inject IRepository Repository
+
+<h3>MarcasIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Marcas/create">
+        Nueva Marca
+    </a>
+</div>
+
+<GenericList MyList="Marcas">
+    <Body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>marca</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var marca in Marcas!)
+                {
+                    <tr>
+                        <td>
+                            @marca.Nombre
+                        </td>
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>
+
+@code {
+    public List<Marca>? Marcas { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await Repository.Get<List<Marca>>("/api/Marcas");
+        Marcas = responseHttp.Response!;
+    }
+}

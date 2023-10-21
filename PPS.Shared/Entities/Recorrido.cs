@@ -11,7 +11,8 @@ namespace PPS.Shared.Entities
     public class Recorrido
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "El valor es Obligatorio")]
+        [Required(ErrorMessage = "El Nombre es Obligatorio")]
+        public string Nombre { get; set; } = string.Empty;
         public int valor { get; set; }
         public int Estado { get; set; }
         [JsonIgnore]

@@ -12,22 +12,7 @@ namespace PPS.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "estadoServicios",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Estado = table.Column<int>(type: "int", nullable: false),
-                    Observacion = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_estadoServicios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "lineas",
+                name: "Lineas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -37,25 +22,11 @@ namespace PPS.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_lineas", x => x.Id);
+                    table.PrimaryKey("PK_Lineas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "liquidacions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Valor = table.Column<int>(type: "int", nullable: false),
-                    Estado = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_liquidacions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "marcas",
+                name: "Marcas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -65,25 +36,26 @@ namespace PPS.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_marcas", x => x.Id);
+                    table.PrimaryKey("PK_Marcas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "recorridos",
+                name: "Recorridos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     valor = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recorridos", x => x.Id);
+                    table.PrimaryKey("PK_Recorridos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "tipoCarrocerias",
+                name: "TipoCarrocerias",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -93,11 +65,11 @@ namespace PPS.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tipoCarrocerias", x => x.Id);
+                    table.PrimaryKey("PK_TipoCarrocerias", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "transitos",
+                name: "Transitos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -107,11 +79,11 @@ namespace PPS.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_transitos", x => x.Id);
+                    table.PrimaryKey("PK_Transitos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "servicios",
+                name: "Servicios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -119,38 +91,22 @@ namespace PPS.API.Migrations
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NumeroServicio = table.Column<int>(type: "int", nullable: false),
                     Observacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdEstadoServicio = table.Column<int>(type: "int", nullable: false),
                     IdRecorrido = table.Column<int>(type: "int", nullable: false),
-                    IdLiquidacion = table.Column<int>(type: "int", nullable: false),
-                    EstadoServicioId = table.Column<int>(type: "int", nullable: false),
-                    recorridoId = table.Column<int>(type: "int", nullable: false),
-                    LiquidacionId = table.Column<int>(type: "int", nullable: false)
+                    recorridoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_servicios", x => x.Id);
+                    table.PrimaryKey("PK_Servicios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_servicios_estadoServicios_EstadoServicioId",
-                        column: x => x.EstadoServicioId,
-                        principalTable: "estadoServicios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_servicios_liquidacions_LiquidacionId",
-                        column: x => x.LiquidacionId,
-                        principalTable: "liquidacions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_servicios_recorridos_recorridoId",
+                        name: "FK_Servicios_Recorridos_recorridoId",
                         column: x => x.recorridoId,
-                        principalTable: "recorridos",
+                        principalTable: "Recorridos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "vehiculos",
+                name: "Vehiculos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -174,29 +130,72 @@ namespace PPS.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_vehiculos", x => x.Id);
+                    table.PrimaryKey("PK_Vehiculos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_vehiculos_lineas_lineaId",
+                        name: "FK_Vehiculos_Lineas_lineaId",
                         column: x => x.lineaId,
-                        principalTable: "lineas",
+                        principalTable: "Lineas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_vehiculos_marcas_marcaId",
+                        name: "FK_Vehiculos_Marcas_marcaId",
                         column: x => x.marcaId,
-                        principalTable: "marcas",
+                        principalTable: "Marcas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_vehiculos_tipoCarrocerias_TipoCarroceriaId",
+                        name: "FK_Vehiculos_TipoCarrocerias_TipoCarroceriaId",
                         column: x => x.TipoCarroceriaId,
-                        principalTable: "tipoCarrocerias",
+                        principalTable: "TipoCarrocerias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_vehiculos_transitos_TransitoId",
+                        name: "FK_Vehiculos_Transitos_TransitoId",
                         column: x => x.TransitoId,
-                        principalTable: "transitos",
+                        principalTable: "Transitos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EstadoServicios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Estado = table.Column<int>(type: "int", nullable: false),
+                    Observacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdServicioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EstadoServicios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EstadoServicios_Servicios_IdServicioId",
+                        column: x => x.IdServicioId,
+                        principalTable: "Servicios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Liquidacions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Valor = table.Column<int>(type: "int", nullable: false),
+                    Estado = table.Column<int>(type: "int", nullable: false),
+                    IdServicioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Liquidacions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Liquidacions_Servicios_IdServicioId",
+                        column: x => x.IdServicioId,
+                        principalTable: "Servicios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -214,79 +213,79 @@ namespace PPS.API.Migrations
                 {
                     table.PrimaryKey("PK_Vehiculo_Servicio", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Vehiculo_Servicio_servicios_IdServicioId",
+                        name: "FK_Vehiculo_Servicio_Servicios_IdServicioId",
                         column: x => x.IdServicioId,
-                        principalTable: "servicios",
+                        principalTable: "Servicios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehiculo_Servicio_vehiculos_IdVehiculoId",
+                        name: "FK_Vehiculo_Servicio_Vehiculos_IdVehiculoId",
                         column: x => x.IdVehiculoId,
-                        principalTable: "vehiculos",
+                        principalTable: "Vehiculos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_estadoServicios_Estado",
-                table: "estadoServicios",
+                name: "IX_EstadoServicios_Estado",
+                table: "EstadoServicios",
                 column: "Estado",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_lineas_Nombre",
-                table: "lineas",
+                name: "IX_EstadoServicios_IdServicioId",
+                table: "EstadoServicios",
+                column: "IdServicioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lineas_Nombre",
+                table: "Lineas",
                 column: "Nombre",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_liquidacions_Valor",
-                table: "liquidacions",
+                name: "IX_Liquidacions_IdServicioId",
+                table: "Liquidacions",
+                column: "IdServicioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Liquidacions_Valor",
+                table: "Liquidacions",
                 column: "Valor",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_marcas_Nombre",
-                table: "marcas",
+                name: "IX_Marcas_Nombre",
+                table: "Marcas",
                 column: "Nombre",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_recorridos_valor",
-                table: "recorridos",
-                column: "valor",
+                name: "IX_Recorridos_Nombre",
+                table: "Recorridos",
+                column: "Nombre",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_servicios_EstadoServicioId",
-                table: "servicios",
-                column: "EstadoServicioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_servicios_LiquidacionId",
-                table: "servicios",
-                column: "LiquidacionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_servicios_NumeroServicio",
-                table: "servicios",
+                name: "IX_Servicios_NumeroServicio",
+                table: "Servicios",
                 column: "NumeroServicio",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_servicios_recorridoId",
-                table: "servicios",
+                name: "IX_Servicios_recorridoId",
+                table: "Servicios",
                 column: "recorridoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tipoCarrocerias_Nombre",
-                table: "tipoCarrocerias",
+                name: "IX_TipoCarrocerias_Nombre",
+                table: "TipoCarrocerias",
                 column: "Nombre",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_transitos_Nombre",
-                table: "transitos",
+                name: "IX_Transitos_Nombre",
+                table: "Transitos",
                 column: "Nombre",
                 unique: true);
 
@@ -301,29 +300,29 @@ namespace PPS.API.Migrations
                 column: "IdVehiculoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_vehiculos_lineaId",
-                table: "vehiculos",
+                name: "IX_Vehiculos_lineaId",
+                table: "Vehiculos",
                 column: "lineaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_vehiculos_marcaId",
-                table: "vehiculos",
+                name: "IX_Vehiculos_marcaId",
+                table: "Vehiculos",
                 column: "marcaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_vehiculos_placa",
-                table: "vehiculos",
+                name: "IX_Vehiculos_placa",
+                table: "Vehiculos",
                 column: "placa",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_vehiculos_TipoCarroceriaId",
-                table: "vehiculos",
+                name: "IX_Vehiculos_TipoCarroceriaId",
+                table: "Vehiculos",
                 column: "TipoCarroceriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_vehiculos_TransitoId",
-                table: "vehiculos",
+                name: "IX_Vehiculos_TransitoId",
+                table: "Vehiculos",
                 column: "TransitoId");
         }
 
@@ -331,34 +330,34 @@ namespace PPS.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EstadoServicios");
+
+            migrationBuilder.DropTable(
+                name: "Liquidacions");
+
+            migrationBuilder.DropTable(
                 name: "Vehiculo_Servicio");
 
             migrationBuilder.DropTable(
-                name: "servicios");
+                name: "Servicios");
 
             migrationBuilder.DropTable(
-                name: "vehiculos");
+                name: "Vehiculos");
 
             migrationBuilder.DropTable(
-                name: "estadoServicios");
+                name: "Recorridos");
 
             migrationBuilder.DropTable(
-                name: "liquidacions");
+                name: "Lineas");
 
             migrationBuilder.DropTable(
-                name: "recorridos");
+                name: "Marcas");
 
             migrationBuilder.DropTable(
-                name: "lineas");
+                name: "TipoCarrocerias");
 
             migrationBuilder.DropTable(
-                name: "marcas");
-
-            migrationBuilder.DropTable(
-                name: "tipoCarrocerias");
-
-            migrationBuilder.DropTable(
-                name: "transitos");
+                name: "Transitos");
         }
     }
 }

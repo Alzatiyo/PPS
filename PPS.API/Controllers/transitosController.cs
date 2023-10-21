@@ -18,13 +18,13 @@ namespace PPS.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Ok(await _context.transitos.ToListAsync());
+            return Ok(await _context.Transitos.ToListAsync());
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult> Get(int id)
         {
-            var transito = await _context.transitos.FirstOrDefaultAsync(m=>m.Id == id);
+            var transito = await _context.Transitos.FirstOrDefaultAsync(m=>m.Id == id);
             if (transito == null)
                 return NotFound();
             else

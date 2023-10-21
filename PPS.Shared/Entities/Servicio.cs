@@ -14,19 +14,16 @@ namespace PPS.Shared.Entities
         public int NumeroServicio { get; set; }
         public string? Observacion { get; set; } = null;
         [JsonIgnore]
-        public int IdEstadoServicio { get; set; }
-        [JsonIgnore]
         public int IdRecorrido { get; set; }
-        [JsonIgnore]
-        public int IdLiquidacion { get; set; }
-        [JsonIgnore]
-        public EstadoServicio EstadoServicio { get; set; }
+
         [JsonIgnore]
         public Recorrido recorrido { get; set; }
         [JsonIgnore]
         public ICollection<Vehiculo_Servicio> vehiculo_Servicios { get; set; }
-        [JsonIgnore]
-        public Liquidacion Liquidacion { get; set; }
 
+        [JsonIgnore]
+        public ICollection<EstadoServicio> EstadoServicios { get; set; }
+        [JsonIgnore]
+        public ICollection<Liquidacion> Liquidacions { get; set; }
     }
 }

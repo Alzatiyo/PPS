@@ -15,7 +15,7 @@ namespace PPS.Shared.Entities
         public int Valor { get; set; }
         public int Estado { get; set; }
         [JsonIgnore]
-        public ICollection<Servicio> servicios { get; set; }
+        public Servicio IdServicio { get; set; }
 
     }
 }

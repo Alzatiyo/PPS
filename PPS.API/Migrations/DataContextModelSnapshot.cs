@@ -36,6 +36,9 @@ namespace PPS.API.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdServicioId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Observacion")
                         .HasColumnType("nvarchar(max)");
 
@@ -44,7 +47,9 @@ namespace PPS.API.Migrations
                     b.HasIndex("Estado")
                         .IsUnique();
 
-                    b.ToTable("estadoServicios");
+                    b.HasIndex("IdServicioId");
+
+                    b.ToTable("EstadoServicios");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Linea", b =>
@@ -67,7 +72,7 @@ namespace PPS.API.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("lineas");
+                    b.ToTable("Lineas");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Liquidacion", b =>
@@ -81,15 +86,20 @@ namespace PPS.API.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdServicioId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Valor")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdServicioId");
+
                     b.HasIndex("Valor")
                         .IsUnique();
 
-                    b.ToTable("liquidacions");
+                    b.ToTable("Liquidacions");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Marca", b =>
@@ -112,7 +122,7 @@ namespace PPS.API.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("marcas");
+                    b.ToTable("Marcas");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Recorrido", b =>
@@ -126,15 +136,19 @@ namespace PPS.API.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("valor")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("valor")
+                    b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("recorridos");
+                    b.ToTable("Recorridos");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Servicio", b =>
@@ -145,22 +159,10 @@ namespace PPS.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EstadoServicioId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdEstadoServicio")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdLiquidacion")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdRecorrido")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LiquidacionId")
                         .HasColumnType("int");
 
                     b.Property<int>("NumeroServicio")
@@ -174,16 +176,12 @@ namespace PPS.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstadoServicioId");
-
-                    b.HasIndex("LiquidacionId");
-
                     b.HasIndex("NumeroServicio")
                         .IsUnique();
 
                     b.HasIndex("recorridoId");
 
-                    b.ToTable("servicios");
+                    b.ToTable("Servicios");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.TipoCarroceria", b =>
@@ -206,7 +204,7 @@ namespace PPS.API.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("tipoCarrocerias");
+                    b.ToTable("TipoCarrocerias");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Transito", b =>
@@ -229,7 +227,7 @@ namespace PPS.API.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("transitos");
+                    b.ToTable("Transitos");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Vehiculo", b =>
@@ -308,7 +306,7 @@ namespace PPS.API.Migrations
                     b.HasIndex("placa")
                         .IsUnique();
 
-                    b.ToTable("vehiculos");
+                    b.ToTable("Vehiculos");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Vehiculo_Servicio", b =>
@@ -334,29 +332,35 @@ namespace PPS.API.Migrations
                     b.ToTable("Vehiculo_Servicio");
                 });
 
+            modelBuilder.Entity("PPS.Shared.Entities.EstadoServicio", b =>
+                {
+                    b.HasOne("PPS.Shared.Entities.Servicio", "IdServicio")
+                        .WithMany("EstadoServicios")
+                        .HasForeignKey("IdServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdServicio");
+                });
+
+            modelBuilder.Entity("PPS.Shared.Entities.Liquidacion", b =>
+                {
+                    b.HasOne("PPS.Shared.Entities.Servicio", "IdServicio")
+                        .WithMany("Liquidacions")
+                        .HasForeignKey("IdServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdServicio");
+                });
+
             modelBuilder.Entity("PPS.Shared.Entities.Servicio", b =>
                 {
-                    b.HasOne("PPS.Shared.Entities.EstadoServicio", "EstadoServicio")
-                        .WithMany("servicios")
-                        .HasForeignKey("EstadoServicioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PPS.Shared.Entities.Liquidacion", "Liquidacion")
-                        .WithMany("servicios")
-                        .HasForeignKey("LiquidacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PPS.Shared.Entities.Recorrido", "recorrido")
                         .WithMany("servicios")
                         .HasForeignKey("recorridoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("EstadoServicio");
-
-                    b.Navigation("Liquidacion");
 
                     b.Navigation("recorrido");
                 });
@@ -415,19 +419,9 @@ namespace PPS.API.Migrations
                     b.Navigation("IdVehiculo");
                 });
 
-            modelBuilder.Entity("PPS.Shared.Entities.EstadoServicio", b =>
-                {
-                    b.Navigation("servicios");
-                });
-
             modelBuilder.Entity("PPS.Shared.Entities.Linea", b =>
                 {
                     b.Navigation("vehiculos");
-                });
-
-            modelBuilder.Entity("PPS.Shared.Entities.Liquidacion", b =>
-                {
-                    b.Navigation("servicios");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Marca", b =>
@@ -442,6 +436,10 @@ namespace PPS.API.Migrations
 
             modelBuilder.Entity("PPS.Shared.Entities.Servicio", b =>
                 {
+                    b.Navigation("EstadoServicios");
+
+                    b.Navigation("Liquidacions");
+
                     b.Navigation("vehiculo_Servicios");
                 });
 

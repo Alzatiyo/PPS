@@ -1,0 +1,50 @@
+﻿@page "/TipoCarrocerias"
+@using PPS.WEB.Repositories;
+@using PPS.Shared.Entities;
+
+@inject IRepository Repository
+
+<h3>TipoCarroceriasIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/TipoCarrocerias/create">
+        Nuevo Tipo Carroceria
+    </a>
+</div>
+
+<GenericList MyList="TipoCarrocerias">
+    <Body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>TipoCarroceria</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var TipoCarroceria in TipoCarrocerias!)
+                {
+                    <tr>
+                        <td>
+                            @TipoCarroceria.Nombre
+                        </td>
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>
+
+@code {
+    public List<TipoCarroceria>? TipoCarrocerias { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await Repository.Get<List<TipoCarroceria>>("/api/Lineas");
+        TipoCarrocerias = responseHttp.Response!;
+    }
+}

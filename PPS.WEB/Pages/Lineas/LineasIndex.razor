@@ -1,0 +1,50 @@
+﻿@page "/Lineas"
+@using PPS.WEB.Repositories;
+@using PPS.Shared.Entities;
+
+@inject IRepository Repository
+
+<h3>LineasIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Lineas/create">
+        Nueva Linea
+    </a>
+</div>
+
+<GenericList MyList="Lineas">
+    <Body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>linea</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var linea in Lineas!)
+                {
+                    <tr>
+                        <td>
+                            @linea.Nombre
+                        </td>
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>
+
+@code {
+    public List<Linea>? Lineas { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await Repository.Get<List<Linea>>("/api/Lineas");
+        Lineas = responseHttp.Response!;
+    }
+}

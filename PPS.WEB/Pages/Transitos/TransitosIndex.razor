@@ -1,0 +1,50 @@
+﻿@page "/Transitos"
+@using PPS.WEB.Repositories;
+@using PPS.Shared.Entities;
+
+@inject IRepository Repository
+
+<h3>TransitosIndex</h3>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Transitos/create">
+        Nuevo Transito
+    </a>
+</div>
+
+<GenericList MyList="Transitos">
+    <Body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>transito</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transito in Transitos!)
+                {
+                    <tr>
+                        <td>
+                            @transito.Nombre
+                        </td>
+                        <td>
+                            <a class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>
+
+@code {
+    public List<Transito>? Transitos { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await Repository.Get<List<Transito>>("/api/Marcas");
+        Transitos = responseHttp.Response!;
+    }
+}

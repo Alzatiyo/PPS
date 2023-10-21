@@ -13,7 +13,7 @@ namespace PPS.Shared.Entities
         public int Id { get; set; }
         [Required(ErrorMessage = "El Nombre es Obligatorio")]
         public string Nombre { get; set; } = string.Empty;
-        public string? Observacion { get; set; } = null;
+        public string Observacion { get; set; } = null;
         [JsonIgnore]
         public ICollection<Vehiculo> vehiculos { get; set; }
     }

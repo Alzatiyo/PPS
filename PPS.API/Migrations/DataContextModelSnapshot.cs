@@ -36,18 +36,21 @@ namespace PPS.API.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdServicioId")
+                    b.Property<int>("IdServicio")
                         .HasColumnType("int");
 
                     b.Property<string>("Observacion")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ServicioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Estado")
                         .IsUnique();
 
-                    b.HasIndex("IdServicioId");
+                    b.HasIndex("ServicioId");
 
                     b.ToTable("EstadoServicios");
                 });
@@ -86,7 +89,10 @@ namespace PPS.API.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdServicioId")
+                    b.Property<int>("IdServicio")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServicioId")
                         .HasColumnType("int");
 
                     b.Property<int>("Valor")
@@ -94,7 +100,7 @@ namespace PPS.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdServicioId");
+                    b.HasIndex("ServicioId");
 
                     b.HasIndex("Valor")
                         .IsUnique();
@@ -171,7 +177,7 @@ namespace PPS.API.Migrations
                     b.Property<string>("Observacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("recorridoId")
+                    b.Property<int?>("RecorridoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -179,7 +185,7 @@ namespace PPS.API.Migrations
                     b.HasIndex("NumeroServicio")
                         .IsUnique();
 
-                    b.HasIndex("recorridoId");
+                    b.HasIndex("RecorridoId");
 
                     b.ToTable("Servicios");
                 });
@@ -269,20 +275,20 @@ namespace PPS.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoCarroceriaId")
+                    b.Property<int?>("TipoCarroceriaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TransitoId")
+                    b.Property<int?>("TransitoId")
                         .HasColumnType("int");
 
                     b.Property<string>("color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("lineaId")
+                    b.Property<int?>("lineaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("marcaId")
+                    b.Property<int?>("marcaId")
                         .HasColumnType("int");
 
                     b.Property<string>("modelo")
@@ -317,79 +323,71 @@ namespace PPS.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<int>("IdServicioId")
+                    b.Property<int>("IdServicio")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdVehiculoId")
+                    b.Property<int>("IdVehiculo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServicioId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VehiculoId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("IdServicioId");
+                    b.HasIndex("ServicioId");
 
-                    b.HasIndex("IdVehiculoId");
+                    b.HasIndex("VehiculoId");
 
                     b.ToTable("Vehiculo_Servicio");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.EstadoServicio", b =>
                 {
-                    b.HasOne("PPS.Shared.Entities.Servicio", "IdServicio")
+                    b.HasOne("PPS.Shared.Entities.Servicio", "Servicio")
                         .WithMany("EstadoServicios")
-                        .HasForeignKey("IdServicioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ServicioId");
 
-                    b.Navigation("IdServicio");
+                    b.Navigation("Servicio");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Liquidacion", b =>
                 {
-                    b.HasOne("PPS.Shared.Entities.Servicio", "IdServicio")
+                    b.HasOne("PPS.Shared.Entities.Servicio", "Servicio")
                         .WithMany("Liquidacions")
-                        .HasForeignKey("IdServicioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ServicioId");
 
-                    b.Navigation("IdServicio");
+                    b.Navigation("Servicio");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Servicio", b =>
                 {
-                    b.HasOne("PPS.Shared.Entities.Recorrido", "recorrido")
+                    b.HasOne("PPS.Shared.Entities.Recorrido", "Recorrido")
                         .WithMany("servicios")
-                        .HasForeignKey("recorridoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RecorridoId");
 
-                    b.Navigation("recorrido");
+                    b.Navigation("Recorrido");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Vehiculo", b =>
                 {
                     b.HasOne("PPS.Shared.Entities.TipoCarroceria", "TipoCarroceria")
                         .WithMany("vehiculos")
-                        .HasForeignKey("TipoCarroceriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TipoCarroceriaId");
 
                     b.HasOne("PPS.Shared.Entities.Transito", "Transito")
                         .WithMany("vehiculos")
-                        .HasForeignKey("TransitoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TransitoId");
 
                     b.HasOne("PPS.Shared.Entities.Linea", "linea")
                         .WithMany("vehiculos")
-                        .HasForeignKey("lineaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("lineaId");
 
                     b.HasOne("PPS.Shared.Entities.Marca", "marca")
                         .WithMany("vehiculos")
-                        .HasForeignKey("marcaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("marcaId");
 
                     b.Navigation("TipoCarroceria");
 
@@ -402,21 +400,17 @@ namespace PPS.API.Migrations
 
             modelBuilder.Entity("PPS.Shared.Entities.Vehiculo_Servicio", b =>
                 {
-                    b.HasOne("PPS.Shared.Entities.Servicio", "IdServicio")
+                    b.HasOne("PPS.Shared.Entities.Servicio", "Servicio")
                         .WithMany("vehiculo_Servicios")
-                        .HasForeignKey("IdServicioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ServicioId");
 
-                    b.HasOne("PPS.Shared.Entities.Vehiculo", "IdVehiculo")
+                    b.HasOne("PPS.Shared.Entities.Vehiculo", "Vehiculo")
                         .WithMany("vehiculo_Servicios")
-                        .HasForeignKey("IdVehiculoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VehiculoId");
 
-                    b.Navigation("IdServicio");
+                    b.Navigation("Servicio");
 
-                    b.Navigation("IdVehiculo");
+                    b.Navigation("Vehiculo");
                 });
 
             modelBuilder.Entity("PPS.Shared.Entities.Linea", b =>

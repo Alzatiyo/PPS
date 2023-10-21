@@ -12,12 +12,11 @@ namespace PPS.Shared.Entities
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public int NumeroServicio { get; set; }
-        public string? Observacion { get; set; } = null;
+        public string Observacion { get; set; } = null;
         [JsonIgnore]
         public int IdRecorrido { get; set; }
-
         [JsonIgnore]
-        public Recorrido recorrido { get; set; }
+        public Recorrido Recorrido { get; set; }
         [JsonIgnore]
         public ICollection<Vehiculo_Servicio> vehiculo_Servicios { get; set; }
 

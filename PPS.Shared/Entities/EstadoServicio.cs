@@ -13,9 +13,11 @@ namespace PPS.Shared.Entities
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public int Estado { get; set; }
-        public string? Observacion { get; set; } = null;
+        public string Observacion { get; set; } = null;
         [JsonIgnore]
-        public Servicio IdServicio { get; set; }
+        public int IdServicio { get; set; }
+        [JsonIgnore]
+        public Servicio Servicio { get; set; }
 
     }
 }

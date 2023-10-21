@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PPS.Shared.DTOs;
 using PPS.Shared.Entities;
-using PPS.Shared.Entities;
-
 
 namespace PPS.API.Helpers
 {
@@ -16,5 +15,9 @@ namespace PPS.API.Helpers
         Task AddUserToRoleAsync(User user, string roleName);
 
         Task<bool> IsUserInRoleAsync(User user, string roleName);
+
+        Task<SignInResult> LoginAsync(LoginDTO model);
+
+        Task LogoutAsync();
     }
 }

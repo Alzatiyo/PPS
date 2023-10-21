@@ -28,14 +28,6 @@ namespace PPS.Shared.Entities
         [Required(ErrorMessage = "El Numero de Chasis es Obligatorio")]
         public string NumeroChasis { get; set; } = string.Empty;
         [JsonIgnore]
-        public int IdTransito { get; set; }
-        [JsonIgnore]
-        public int IdMarca { get; set; }
-        [JsonIgnore]
-        public int IdLinea { get; set; }
-        [JsonIgnore]
-        public int IdTipoCarroceria { get; set; }
-        [JsonIgnore]
         public Transito Transito { get; set; }
         [JsonIgnore]
         public Marca marca { get; set; }

@@ -9,9 +9,7 @@ namespace PPS.API.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         { 
         }
-        public DbSet<EstadoServicio> EstadoServicios { get; set; }
         public DbSet<Linea> Lineas { get; set; }
-        public DbSet<Liquidacion> Liquidacions { get; set; }
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Recorrido> Recorridos { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
@@ -23,9 +21,7 @@ namespace PPS.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<EstadoServicio>().HasIndex(m => m.Estado).IsUnique();
             modelBuilder.Entity<Linea>().HasIndex(m => m.Nombre).IsUnique();
-            modelBuilder.Entity<Liquidacion>().HasIndex(m => m.Valor).IsUnique();
             modelBuilder.Entity<Marca>().HasIndex(m => m.Nombre).IsUnique();
             modelBuilder.Entity<Recorrido>().HasIndex(m => m.Nombre).IsUnique();
             modelBuilder.Entity<Servicio>().HasIndex(m => m.NumeroServicio).IsUnique();

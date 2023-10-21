@@ -8,7 +8,7 @@ namespace PPS.Shared.Enums
 {
     public enum UserType
     {
-        Admin,
+        SuperAdmin,
         User
     }
 }

@@ -38,5 +38,23 @@ namespace PPS.API.Controllers
             await _context.SaveChangesAsync();
             return Ok(marca);
         }
+        [HttpPut]
+        public async Task<ActionResult> Put(Marca marca)
+        {
+            _context.Update(marca);
+            await _context.SaveChangesAsync();
+            return Ok(marca);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var marca = await _context.Marcas.Where(m => m.Id == id).ExecuteDeleteAsync();
+
+            if (marca == 0)
+                return NotFound();
+            else
+                return NoContent();
+        }
     }
 }

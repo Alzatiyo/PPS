@@ -38,5 +38,23 @@ namespace PPS.API.Controllers
             await _context.SaveChangesAsync();
             return Ok(recorrido);
         }
+        [HttpPut]
+        public async Task<ActionResult> Put(Recorrido recorrido)
+        {
+            _context.Update(recorrido);
+            await _context.SaveChangesAsync();
+            return Ok(recorrido);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var recorrido = await _context.Recorridos.Where(m => m.Id == id).ExecuteDeleteAsync();
+
+            if (recorrido == 0)
+                return NotFound();
+            else
+                return NoContent();
+        }
     }
 }

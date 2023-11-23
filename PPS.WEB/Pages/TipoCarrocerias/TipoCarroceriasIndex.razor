@@ -40,11 +40,11 @@
 </GenericList>
 
 @code {
-    public List<TipoCarroceria>? TipoCarrocerias { get; set; }
+    public List<TipoCarroceria> TipoCarrocerias { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.Get<List<TipoCarroceria>>("/api/Lineas");
+        var responseHttp = await Repository.Get<List<TipoCarroceria>>("/api/TipoCarrocerias");
         TipoCarrocerias = responseHttp.Response!;
     }
 }

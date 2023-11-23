@@ -40,11 +40,11 @@
 </GenericList>
 
 @code {
-    public List<Transito>? Transitos { get; set; }
+    public List<Transito> Transitos { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.Get<List<Transito>>("/api/Marcas");
+        var responseHttp = await Repository.Get<List<Transito>>("/api/Transitos");
         Transitos = responseHttp.Response!;
     }
 }

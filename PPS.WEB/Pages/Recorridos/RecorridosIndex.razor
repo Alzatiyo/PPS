@@ -1,4 +1,4 @@
-﻿@page "/Recorridos"
+﻿@page "/Recorrido"
 @using PPS.WEB.Repositories;
 @using PPS.Shared.Entities;
 
@@ -44,7 +44,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.Get<List<Recorrido>>("/api/Recorridos");
+        var responseHttp = await Repository.Get<List<Recorrido>>("/api/Recorrido");
         Recorridos = responseHttp.Response!;
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/Marcas"
+﻿@page "/Marca"
 @using PPS.WEB.Repositories;
 @using PPS.Shared.Entities;
 
@@ -7,7 +7,7 @@
 <h3>MarcasIndex</h3>
 
 <div class="mb-3">
-    <a class="btn btn-primary" href="/Marcas/create">
+    <a class="btn btn-primary" href="/Marca/create">
         Nueva Marca
     </a>
 </div>
@@ -44,7 +44,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.Get<List<Marca>>("/api/Marcas");
+        var responseHttp = await Repository.Get<List<Marca>>("/api/Marca");
         Marcas = responseHttp.Response!;
     }
 }

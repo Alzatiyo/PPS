@@ -1,4 +1,4 @@
-﻿@page "/TipoCarrocerias"
+﻿@page "/TipoCarroceria"
 @using PPS.WEB.Repositories;
 @using PPS.Shared.Entities;
 
@@ -44,7 +44,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHttp = await Repository.Get<List<TipoCarroceria>>("/api/TipoCarrocerias");
+        var responseHttp = await Repository.Get<List<TipoCarroceria>>("/api/TipoCarroceria");
         TipoCarrocerias = responseHttp.Response!;
     }
 }
